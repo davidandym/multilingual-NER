@@ -1,17 +1,20 @@
 # multilingual-NER
 
-Code for the models used in "[Sources of Transfer in Multilingual NER](https://www.aclweb.org/anthology/2020.acl-main.720/)" published at ACL 2020.
+Code for the models used in "[Sources of Transfer in Multilingual NER](https://www.aclweb.org/anthology/2020.acl-main.720/)", published at ACL 2020.
 
 Written in python 3.6 with `tensorflow-1.13`.
-You'll need to setup the local `ner` package in order to run the scripts. To do so, you can do something like
+
+The code is separated into 2 parts, the `ner` package which needs to be installed via `setup.py` and the `scripts` folder which contains the executables to run the models and generate the vocabularies. Oh, and it also has the official `conlleval` script, which should be able to run on the prediction outputs of any of the models here.
+
+To setup the `ner` package, I think it suffices to run something like:
 ```
 python setup.py [install / develop]
 ```
-to install the package (I would only do this in a virtual environment).
+although it is recommended that this is done in a virtual environment with no other dependences named `ner`, haha.
 
 ## Data and Vocabs
 
-Datasets are assumed to be in "almost" CoNLL03 format (minus any meta-data) where column 0 contains the words, column 1 contains the tags, and they are tab-separated, i.e.
+All datasets are assumed to be in "almost" CoNLL03 format (minus any meta-data) where column 0 contains the words, column 1 contains the tags, and they are tab-separated, i.e.
 ```
 উত্তর    B-GPE
 রাইন I-GPE
@@ -23,8 +26,13 @@ Datasets are assumed to be in "almost" CoNLL03 format (minus any meta-data) wher
 আমরা O
 বাস  O
 ```
+To see how files are read in, see `ner/data/io.py` and `ner/data/datsets.py`.
 
 At this time I cannot release the LORELEI datasets that were used in the work, but they are in the process of being released on LDC as of July 2020.
+
+### Multilingual data
+
+For my multilingual experiments, I naively concatenated the training datasets of all languages together and treated the output as one large training file. In the paper I do not use word-embeddings, but in my early experiments I did. In this case, naively concatenating datasets together may not work well if you want to ensure that overlapping words between languages do not share pre-trained embeddings, but right now the code-base is not set up for that. It can run on word-embeddings, but there are no mechanisms in place to handle embeddings from multiple languages in a nice way.
 
 ### CRF Vocab
 
