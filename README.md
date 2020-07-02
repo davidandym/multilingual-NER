@@ -71,6 +71,12 @@ The byte-to-span label vocabulary is hardcoded. See `ner/byte.py :: seq2seq_inde
 
 ## Training and Predicting
 
+There are 3 models in this code-base:
+
+- `byte_to_span`
+- `charner`
+- `standard_word_crf`
+
 All experiments are run through `scripts/run_experiment.py` with two modes, train and predict. Additionally, each model has a set of default hyper-parameters which are defined in the same file as the model. For example, a default parameter set for charner looks like:
 ```python
 @Registries.hparams.register
