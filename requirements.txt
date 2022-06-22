@@ -22,7 +22,7 @@ Markdown==3.1.1
 matplotlib==3.1.1
 mock==3.0.5
 -e git+https://gitlab.hltcoe.jhu.edu/research/scale2019.git@26f079abcb9b15214b62df30646918c3c0895b5b#egg=ner
-numpy==1.16.3
+numpy==1.22.0
 pandas==0.25.2
 parso==0.5.1
 pexpect==4.7.0
